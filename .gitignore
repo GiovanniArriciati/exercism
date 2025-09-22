@@ -1,0 +1,6 @@
+**/HELP.md
+**/*.bats
+**/.exercism/**
+*.bash
+bash/~/.config/exercism/user.json
+.DS_Store
