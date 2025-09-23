@@ -11,23 +11,6 @@ isprime() {
     return 0
 }
 
-main_with_primality_check() {
-    local n=$1
-    local output=()
-    local i
-    for ((i=2; i<=n; i++)); do
-        if isprime_array $i; then
-            echo "$i is prime"
-            array+=($i)
-            while ((n % i)); do
-                output+=("$i")
-                n=$((n / i))
-            done
-        fi
-    done
-    echo "${output[@]}"
-}
-
 main() {
     local n=$1
     local output=()
@@ -49,4 +32,4 @@ main() {
     echo "${output[@]}"
 }
 
-main_with_primality_check $@
+main $@
