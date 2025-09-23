@@ -2,12 +2,30 @@
 
 isprime() {
     local n=$1
+    local i
     for (( i=2; i*i<=n; i++ )); do
         if (( n % i == 0 )); then
-        return 1
+            return 1
         fi
     done
     return 0
+}
+
+main_with_primality_check() {
+    local n=$1
+    local output=()
+    local i
+    for ((i=2; i<=n; i++)); do
+        if isprime_array $i; then
+            echo "$i is prime"
+            array+=($i)
+            while ((n % i)); do
+                output+=("$i")
+                n=$((n / i))
+            done
+        fi
+    done
+    echo "${output[@]}"
 }
 
 main() {
@@ -20,6 +38,7 @@ main() {
     done    
     # Handle odd factors
     for ((i=3; i*i<=n; i+=2)); do
+        while ((n % i == 0)); do
             output+=("$i")
             n=$((n / i))
         done
@@ -30,4 +49,4 @@ main() {
     echo "${output[@]}"
 }
 
-main $@
+main_with_primality_check $@
